@@ -12,6 +12,9 @@ requires:
 
 provides: [FloatingTips]
 
+adds (Pierre PINTARIC):
+- Adds new positions toporbottom, bottomortop, leftorright, rightorleft
+
 ...
 */
 
