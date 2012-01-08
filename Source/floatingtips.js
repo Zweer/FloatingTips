@@ -178,20 +178,20 @@ var FloatingTips = new Class({
 			pos = { x: o.offset.x, y: o.offset.y };
 		} else {
 			switch (opos) {
-				case 'top':     pos.y -= tipSz.y + o.distance; break;
+				case 'top':     pos.y -= tip.getSize().y + o.distance; break;
 				case 'right': 	pos.x += trgC.width + o.distance; break;
 				case 'bottom': 	pos.y += trgC.height + o.distance; break;
-				case 'left': 	pos.x -= tipSz.x + o.distance; break;
+				case 'left': 	pos.x -= tip.getSize().x + o.distance; break;
 			}
 		}
 		
 		if (o.center) {
 			switch (opos) {
-				case 'top': case 'bottom': pos.x += (trgC.width / 2 - tipSz.x / 2); break;
-				case 'left': case 'right': pos.y += (trgC.height / 2 - tipSz.y / 2); break;
+				case 'top': case 'bottom': pos.x += (trgC.width / 2 - tip.getSize().x / 2); break;
+				case 'left': case 'right': pos.y += (trgC.height / 2 - tip.getSize().y / 2); break;
 				case 'inside':
-					pos.x += (trgC.width / 2 - tipSz.x / 2);
-					pos.y += (trgC.height / 2 - tipSz.y / 2); break;
+					pos.x += (trgC.width / 2 - tip.getSize().x / 2);
+					pos.y += (trgC.height / 2 - tip.getSize().y / 2); break;
 			}
 		}
 		
