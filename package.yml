@@ -2,8 +2,8 @@ name: FloatingTips
 author: lorenzo.stanco
 category: Interface
 tags: [tip, tooltip, balloon, tips]
-demo: http://jsfiddle.net/yAWDT/176/
+demo: http://jsfiddle.net/yAWDT/400/
 docs: http://wiki.github.com/lorenzos/FloatingTips/docs
-current: 2.1
+current: 2.2
 sources:
 - "Source/floatingtips.js"
