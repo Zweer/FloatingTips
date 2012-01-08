@@ -43,25 +43,55 @@ var FloatingTips = new Class({
 		fx: { 'duration': 'short' }
 	},
 
+    elements: [],
+    boundShow: function(){},
+    boundHide: function(){},
+
 	initialize: function(elements, options) {
 		this.setOptions(options);
+        this.boundShow() = function(e) { this.show(e); }.bind(this);
+        this.boundHide() = function(e) { this.hide(e); }.bind(this);
 		if (!['top', 'right', 'bottom', 'left', 'inside', 'toporbottom', 'bottomortop', 'leftorright', 'rightorleft'].contains(this.options.position)) this.options.position = 'top';
-		if (elements) this.attach(elements);
+		if (elements) {
+            this.elements.include(elements);
+            this.attach();
+        }
 		return this;
 	},
 
-	attach: function(elements) {
+	attach: function(selector) {
+        var selector = selector || null;
 		var s = this;
+        var elements = (selector === null) ? this.elements.join(',') : selector;
 		$$(elements).each(function(e) {
+            if(e.retrieve('hasEvents') !== null) { return; }
 			evs = { };
-			evs[s.options.showOn] = function() { s.show(this); };
-			evs[s.options.hideOn] = function() { s.hide(this); };
+			evs[s.options.showOn] = s.boundShow;
+			evs[s.options.hideOn] = s.boundHide;
 			e.addEvents(evs);
+            e.store('hasEvents', true);
 		});
+        if (selector !== null) {
+            this.elements.include(selector);
+        }
 		return this;
 	},
 
-	show: function(element) {
+    detach: function(selector) {
+        var s = this;
+        var selector = selector || null;
+        var evs = {};
+        var elements = (selector === null) ? this.elements.join(',') : selector;
+        evs[this.options.showOn] = this.boundShow;
+        evs[this.options.hideOn] = this.boundHide;
+        $$(elements).each(function(e) {
+            e.removeEvents(evs);
+            e.eliminate('hasEvents');
+        });
+    },
+
+	show: function(e) {
+        var element = (('target' in e) && (typeof e.target != 'string')) ? document.id(e.target) : e;
 		var old = element.retrieve('floatingtip');
 		if (old) if (old.getStyle('opacity') == 1) { clearTimeout(old.retrieve('timeout')); return this; }
 		var tip = this._create(element);
@@ -72,9 +102,20 @@ var FloatingTips = new Class({
 		return this;
 	},
 	
-	hide: function(element) {
+	hide: function(e) {
+        var element = (('target' in e) && (typeof e.target != 'string')) ? document.id(e.target) : e;
 		var tip = element.retrieve('floatingtip');
-		if (!tip) return this;
+		if (!tip) {
+            if (this.options.position == 'inside') {
+                try {
+                    element = element.getParent().getParent();
+                    tip = element.retrieve('floatingtip');
+                } catch (x) { }
+                if (!tip) return this;
+            } else {
+                return this;
+            }
+        }
 		this._animate(tip, 'out');
 		this.fireEvent('hide', [tip, element]);
 		return this;
