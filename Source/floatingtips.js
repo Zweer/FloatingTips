@@ -49,8 +49,8 @@ var FloatingTips = new Class({
 
 	initialize: function(elements, options) {
 		this.setOptions(options);
-        this.boundShow() = function(e) { this.show(e); }.bind(this);
-        this.boundHide() = function(e) { this.hide(e); }.bind(this);
+        this.boundShow = function(e) { this.show(e); }.bind(this);
+        this.boundHide = function(e) { this.hide(e); }.bind(this);
 		if (!['top', 'right', 'bottom', 'left', 'inside', 'toporbottom', 'bottomortop', 'leftorright', 'rightorleft'].contains(this.options.position)) this.options.position = 'top';
 		if (elements) {
             this.elements.include(elements);
