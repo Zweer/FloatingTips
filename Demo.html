@@ -45,6 +45,15 @@
 				offset: { x: -10 } // Position offset {x, y}
 				
 			});
+
+            // This creates a tip that appear inside the target element
+            new FloatingTips('#focus input', {
+                content: 'rel',
+                position: 'right',
+                showOn: 'focus',
+                hideOn: 'blur',
+                distance: 6
+            });
 			
 		});
 	</script>
@@ -141,7 +150,17 @@
 		</div>
 		
 	</div>
-	
+
+    <div id="focus">
+
+        <p>You can show tooltip on focus instead of cursor events:</p>
+
+        <p>
+            <input type="text" rel="About that field..." value="Edit me">
+        </p>
+
+    </div>
+
 	<div>
 		
 		<p>
@@ -151,6 +170,6 @@
 		</p>
 		
 	</div>
-	
+
 </body>
 </html>
