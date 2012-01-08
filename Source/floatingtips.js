@@ -8,7 +8,7 @@ authors:
 - Lorenzo Stanco
 
 requires:
-- core/1.3: '*'
+- core/1.4.2: '*'
 
 provides: [FloatingTips]
 
@@ -106,7 +106,7 @@ var FloatingTips = new Class({
 		tip.setStyles({ 'position': 'absolute', 'opacity': 0, 'top': 0, 'left': 0 }).inject(body);
 		
 		var tipSz = tip.getSize();
-		var trgC = elem.getCoordinates(body);
+		var trgC = elem.getCoordinates();
 		var pos = { x: trgC.left + o.offset.x, y: trgC.top + o.offset.y };
 		var opos = 'top';
 		switch (o.position) {
