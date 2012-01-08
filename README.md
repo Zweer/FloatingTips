@@ -93,6 +93,7 @@ Docs
 
 **Methods:**
 
-- **`attach(elements)`**: Adds other elements that will trigger floating tips; can an be a string selector or an element collection.
-- **`show(element)`**: Manually show the tip on target `element`.
-- **`hide(element)`**: Manually hide the tip for `element`.
+- **`attach(selector)`**: Adds other elements that will trigger floating tips; can an be a string selector or an element collection.
+- **`detach(selector)`**: Removes elements that will trigger floating tips; can an be a string selector or an element collection.
+- **`show(e)`**: Manually show the tip on target `e` or `e.target` (if `e` is an event).
+- **`hide(e)`**: Manually hide the tip for element `e` or `e.target` (if `e` is an event).
