@@ -88,8 +88,8 @@ Docs
 
 **Events:**
 
-- **`show(tip, element)`**: Fires when the tip appears. `tip` is the tip element, `target` is the target element.
-- **`hide(tip, element)`**: Fires when the tip disappears. `tip` is the tip element, `target` is the target element.
+- **`show(tip, element)`**: Fires when the tip appears. `tip` is the tip element, `element` is the target element.
+- **`hide(tip, element)`**: Fires when the tip disappears. `tip` is the tip element, `element` is the target element.
 
 **Methods:**
 
