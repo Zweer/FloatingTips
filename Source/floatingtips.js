@@ -241,7 +241,7 @@ var FloatingTips = new Class({
 		
 		return tip;
 		
-	},
+	}.protect(),
 	
 	_animate: function(tip, d) {
 		
@@ -270,6 +270,6 @@ var FloatingTips = new Class({
 		
 		return this;
 		
-	}
+	}.protect()
 
 });
