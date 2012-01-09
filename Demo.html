@@ -7,7 +7,6 @@
 	<!-- Include Mootools and FloatingTips -->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.2/mootools-yui-compressed.js"></script>
     <script type="text/javascript" src="Source/floatingtips.js"></script>
-    <script type="text/javascript" src="Source/floatingtips-ajax.js"></script>
 
 	<script type="text/javascript">
 		window.addEvent('domready', function() {
@@ -73,6 +72,26 @@
                     }).send();
 
                     return html;
+                }
+            });
+
+            // Persistent tip
+            new FloatingTips('#persistent a', {
+                position: 'bottom',
+                center: false,
+                showOn: 'click',
+                hideOn: null
+            });
+
+            new FloatingTips('#events a', {
+                onShow: function(tip, element) {
+                    if(element.get('id') == 'first_event')
+                        document.id('second_event').floatingTipShow();
+                },
+
+                onHide: function(tip, element) {
+                    if(element.get('id') == 'first_event')
+                        document.id('second_event').floatingTipHide();
                 }
             })
 			
@@ -186,6 +205,18 @@
 
         <p>You can show tooltip made with ajax calls like <a href="#" title="ajax.html">this</a></p>
 
+    </div>
+    
+    <div id="persistent">
+        
+        <p>Persistent tip <a href="#" title="Persistent tip">here</a>.</p>
+        
+    </div>
+
+    <div id="events">
+        
+        <p>When <a href="#" title="look -->" id="first_event">this</a> tooltip has been shown, <a href="#" title="Here comes the magic" id="second_event">this</a> tooltip will be shown</p>
+        
     </div>
 
 	<div>
