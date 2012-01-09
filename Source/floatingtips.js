@@ -6,6 +6,7 @@ license: MIT-style
 
 authors:
 - Lorenzo Stanco
+- Niccolò Olivieri
 
 requires:
 - core/1.4.2: '*'
