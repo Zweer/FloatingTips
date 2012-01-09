@@ -6,8 +6,9 @@
 	
 	<!-- Include Mootools and FloatingTips -->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.2/mootools-yui-compressed.js"></script>
-	<script type="text/javascript" src="Source/floatingtips.js"></script>
-	
+    <script type="text/javascript" src="Source/floatingtips.js"></script>
+    <script type="text/javascript" src="Source/floatingtips-ajax.js"></script>
+
 	<script type="text/javascript">
 		window.addEvent('domready', function() {
 			
@@ -54,6 +55,26 @@
                 hideOn: 'blur',
                 distance: 6
             });
+
+            // This creates an ajax tip
+            new FloatingTips('#ajax a', {
+                content: function(elem) {
+                    var html = '';
+                    if(!elem.get('floatingtitle')) {
+                        elem.set('floatingtitle', elem.get('title'));
+                        elem.set('title', '');
+                    }
+                    new Request({
+                        url: elem.get('floatingtitle'),
+                        async: false,
+                        onComplete: function(text) {
+                            html = text;
+                        }
+                    }).send();
+
+                    return html;
+                }
+            })
 			
 		});
 	</script>
@@ -158,6 +179,12 @@
         <p>
             <input type="text" rel="About that field..." value="Edit me">
         </p>
+
+    </div>
+
+    <div id="ajax">
+
+        <p>You can show tooltip made with ajax calls like <a href="#" title="ajax.html">this</a></p>
 
     </div>
 
