@@ -72,17 +72,15 @@ var FloatingTips = new Class({
 		$$(elements).each(function(e) {
             if(e.retrieve('floatingObject') !== null) { return; }
 			evs = { };
-            if(s.options.showOn == 'click') {
+            evs[s.options.showOn] = s.boundShow;
+            if(s.options.hideOn == null) {
                 evs[s.options.showOn] = s.boundToggle;
-
                 document.body.addEvent('click', function(event) {
                     if(e.retrieve('floatingVisible') && event.target && event.target != e && !document.id(event.target).getParents().contains(e.retrieve('floatingtip')))
                         s.hide(e);
                 });
-            } else {
-                evs[s.options.showOn] = s.boundShow;
+            } else
                 evs[s.options.hideOn] = s.boundHide;
-            }
 			e.addEvents(evs);
             e.store('floatingObject', s);
 		});
